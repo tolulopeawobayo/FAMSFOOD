@@ -1,1 +1,16 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities'; */
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+
+@layer components {
+    .th-class {
+        @apply py-3 px-6 text-sm font-bold tracking-wider text-left text-pale-sky-300 uppercase text-gray-700 font-sans;
+    }
+}
