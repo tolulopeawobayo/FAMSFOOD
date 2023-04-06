@@ -23,7 +23,7 @@ export class RestApiService {
       this.httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + this.token
+          'Authorization': this.token
         }),
       };
     } else {

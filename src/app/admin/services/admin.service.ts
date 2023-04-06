@@ -11,13 +11,13 @@ export class AdminService {
 
   public getOne(url: any, id: any): Observable<any> {
 
-    return this.ApiService.request(url + '/' + id, 'get', true)
+    return this.ApiService.request(url + '/' + id, 'get', '', true)
 
   }
 
   public getAll(url: any): Observable<any> {
 
-    return this.ApiService.request(url, 'get', true)
+    return this.ApiService.request(url, 'get', '', true)
 
   }
 
@@ -35,7 +35,7 @@ export class AdminService {
 
   public delete(id: any, url: any): Observable<any> {
 
-    return this.ApiService.request(url + '/' + id, 'delete', true)
+    return this.ApiService.request(url + '/' + id, 'delete', '', true)
 
   }
 }
