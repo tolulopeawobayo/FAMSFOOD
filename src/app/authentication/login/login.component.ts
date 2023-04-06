@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   errMsg!: string;
   statusMessage!: string;
   LoginForm = new FormGroup({
-    email: new FormControl("", [Validators.required]),
-    password: new FormControl("", [Validators.required]),
+    userName: new FormControl("", [Validators.required]),
+    userPassword: new FormControl("", [Validators.required]),
   });
   Loading = false;
   roles: any = [];
@@ -35,14 +35,14 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.LoginForm.value).subscribe(
       (res: any) => {
         if (res.status == true) {
-          this.ds.keepData("token", JSON.stringify(res.data.Token));
+          this.ds.keepData("token", JSON.stringify(res.data.jwtToken));
           this.ds.persistData("userinfo", JSON.stringify(res.data));
           this.loading = false;
           this.statusMessage = "Login Successful. Setting up your account....";
           this.router.navigateByUrl('/app/admin/home');
-          this.router.navigateByUrl('/refresh', { skipLocationChange: true }).then(() => {
-            this.router.navigateByUrl('/app/admin/home');
-          });
+          // this.router.navigateByUrl('/refresh', { skipLocationChange: true }).then(() => {
+          //   this.router.navigateByUrl('/app/admin/home');
+          // });
         } else {
           this.errMsg = res.errors;
         }

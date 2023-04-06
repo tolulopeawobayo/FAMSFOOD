@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,10 +20,12 @@ export class NavBarComponent implements OnInit {
     { "menuName": "Orders", "url": "/app/admin/orders" },
     { "menuName": "Accounts", "url": "/app/admin/account" }
   ];
+  userinfo: any;
 
-  constructor() { }
+  constructor(private ds: SharedDataService) { }
 
   ngOnInit(): void {
+    this.userinfo = this.ds.getUser();
   }
 
 }

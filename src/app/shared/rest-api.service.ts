@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, retry, throwError } from 'rxjs';
+import { SharedDataService } from './shared-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,10 @@ export class RestApiService {
   public token;
   public header: HttpHeaders = new HttpHeaders;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private ds: SharedDataService) { }
 
   request(url: string, method: string, body?: any, useToken?: boolean, header?: any): Observable<any> {
-    this.token = '';
+    this.token = this.ds.getData('token');
     if (useToken == true) {
       this.httpOptions = {
         headers: new HttpHeaders({

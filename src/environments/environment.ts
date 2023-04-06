@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ApiURL: '',
+  ApiURL: 'https://famsfoodapi-production.up.railway.app',
   appName: 'FAMSFOOD'
 };
 

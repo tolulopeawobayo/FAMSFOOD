@@ -14,12 +14,12 @@ export class AuthService {
     const endpoint = EndPoints.ONBOARDING;
 
 
-    let urlSearchParams = new URLSearchParams();
-    urlSearchParams.set('username', loginDetails.username);
-    urlSearchParams.set('password', loginDetails.password);
-    let body = urlSearchParams.toString();
+    // let urlSearchParams = new URLSearchParams();
+    // urlSearchParams.set('userName', loginDetails.username);
+    // urlSearchParams.set('userPassword', loginDetails.password);
+    // let body = urlSearchParams.toString();
 
-    return this.ApiService.request(endpoint + '/login', 'post', body, false)
+    return this.ApiService.request(endpoint + '/login', 'post', loginDetails, false)
 
   }
 

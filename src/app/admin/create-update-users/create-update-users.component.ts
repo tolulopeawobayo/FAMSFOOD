@@ -21,17 +21,21 @@ export class CreateUpdateUsersComponent implements OnInit {
     { "Id": 1, "roleName": "Admin" },
     { "Id": 2, "roleName": "Supervisor" }
   ];
+  countries: any = [];
   ContentForm = new FormGroup({
+    userName: new FormControl("", [Validators.required]),
     firstName: new FormControl("", [Validators.required]),
     lastName: new FormControl("", [Validators.required]),
     Email: new FormControl("", [Validators.required]),
     phoneNumber: new FormControl("", [Validators.required]),
     Gender: new FormControl("", [Validators.required]),
-    Role: new FormControl("", [Validators.required]),
-    Nationality: new FormControl("", [Validators.required]),
+    // Role: new FormControl("", [Validators.required]),
+    // Nationality: new FormControl("", [Validators.required]),
   });
   Loading = false;
   EndPoint = EndPoints.ADMIN;
+  url = EndPoints.ROLE;
+  api = EndPoints.GENERAL;
   message: string = '';
   @Input() admin: any;
   @Output() status: EventEmitter<any> = new EventEmitter<any>();
@@ -42,6 +46,7 @@ export class CreateUpdateUsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     if (Object.keys(this.admin).length > 0) {
       this.ContentForm.patchValue(this.admin);
       this.isEdit = true;
@@ -76,6 +81,36 @@ export class CreateUpdateUsersComponent implements OnInit {
       icon: icon,
       text: message
     });
+  }
+
+  getRoles() {
+    this.loading = true;
+    this.adminService.getAll(this.url + '/getallroles').subscribe(
+      (res: any) => {
+        if (res) {
+          this.roles = res.data;
+        }
+        this.loading = false;
+      },
+      (err: any) => {
+        this.loading = false;
+      }
+    );
+  }
+
+  getCountries() {
+    this.loading = true;
+    this.adminService.getAll(this.api + '/getcountries').subscribe(
+      (res: any) => {
+        if (res) {
+          this.countries = res.data;
+        }
+        this.loading = false;
+      },
+      (err: any) => {
+        this.loading = false;
+      }
+    );
   }
 
   Add() {

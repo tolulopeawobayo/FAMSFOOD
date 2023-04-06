@@ -35,6 +35,7 @@ export class MealComponent implements OnInit {
   constructor(private ds: SharedDataService, private dialog: MatDialog, private adminService: AdminService) { }
 
   ngOnInit(): void {
+    this.getData();
   }
 
   getData() {

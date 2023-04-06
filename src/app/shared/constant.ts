@@ -11,7 +11,10 @@ export const EndPoints = {
     SUBSCRIPTION: BASEURL + '/subscription',
     SCHEDULE: BASEURL + '/mealschedule',
     ROLE: BASEURL + '/roles',
-    ACCOUNT: BASEURL + '/account'
+    ACCOUNT: BASEURL + '/account',
+    ORDER: BASEURL + '/order',
+    GENERAL: BASEURL + '/general',
+    DASHBOARD: BASEURL + '/dashboard'
 };
 
 export const SystemConstant: any = {
