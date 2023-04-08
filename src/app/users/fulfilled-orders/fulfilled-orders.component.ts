@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EndPoints } from 'src/app/shared/constant';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
-import { AdminService } from '../services/admin.service';
 import Swal from 'sweetalert2';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-fulfilled-orders',
@@ -31,7 +31,7 @@ export class FulfilledOrdersComponent implements OnInit {
   Error: boolean = false;
   ErrorMessage: string = '';
 
-  constructor(private ds: SharedDataService, private dialog: MatDialog, private adminService: AdminService) { }
+  constructor(private ds: SharedDataService, private dialog: MatDialog, private userService: UserService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -39,7 +39,7 @@ export class FulfilledOrdersComponent implements OnInit {
 
   getData() {
     this.loading = true;
-    this.adminService.getAll(this.endpoint + '/getallfulfilledorders').subscribe(
+    this.userService.getAll(this.endpoint + '/getallfulfilledorders').subscribe(
       res => {
         if (res) {
           this.orders = res.data;
@@ -102,7 +102,7 @@ export class FulfilledOrdersComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value == true) {
-        this.adminService.delete(element, this.endpoint + '/deleteorder').subscribe((res: any) => {
+        this.userService.delete(element, this.endpoint + '/deleteorder').subscribe((res: any) => {
           if (res) {
             Swal.fire(
               'Deleted!',

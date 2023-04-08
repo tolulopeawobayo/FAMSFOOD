@@ -27,6 +27,7 @@ import { PendingOrdersComponent } from './pending-orders/pending-orders.componen
 import { FulfilledOrdersComponent } from './fulfilled-orders/fulfilled-orders.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { CreateUpdateAccountsComponent } from './create-update-accounts/create-update-accounts.component';
+import { CreateUpdateMealOrderComponent } from './create-update-meal-order/create-update-meal-order.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CreateUpdateAccountsComponent } from './create-update-accounts/create-u
     PendingOrdersComponent,
     FulfilledOrdersComponent,
     AllOrdersComponent,
-    CreateUpdateAccountsComponent
+    CreateUpdateAccountsComponent,
+    CreateUpdateMealOrderComponent
   ],
   imports: [
     CommonModule, AdminRoutingModule, MaterialModule, FormsModule

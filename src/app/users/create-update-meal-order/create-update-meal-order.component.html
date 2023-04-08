@@ -1,6 +1,6 @@
 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-        {{action}} Role
+        {{action}} Meal Order
     </h1>
 
     <div *ngIf="loading" class="flex flex-row items-center justify-center">
@@ -45,18 +45,57 @@
     <form [formGroup]="ContentForm" (submit)="submit()">
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
-                <label for="roleName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role
+                <label for="mealName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Meal
                     Name</label>
-                <input type="text" id="roleName" formControlName="roleName"
+                <input type="text" id="mealName" formControlName="mealName"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Role Name" required>
+                    placeholder="Meal Name" required>
             </div>
             <div>
-                <label for="roleDescription" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role
-                    Description</label>
-                <textarea id="roleDescription" rows="4" formControlName="roleDescription"
+                <label for="mealPrice" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Meal
+                    Price</label>
+                <input type="number" id="mealPrice" formControlName="mealPrice"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Meal Price" required>
+            </div>
+            <div>
+                <label for="quantityOrdered"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity
+                    Ordered</label>
+                <input type="number" id="quantityOrdered" formControlName="quantityOrdered"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Quantity Ordered" required>
+            </div>
+            <div>
+                <label for="isAvailable" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Is
+                    Available</label>
+                <select id="isAvailable" formControlName="isAvailable"
+                    class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-black dark:focus:border-blue-500">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+            <div>
+                <label for="Address" data-te-select-label-ref
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Address</label>
+                <textarea id="Address" rows="4" formControlName="Address"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Role Description"></textarea>
+                    placeholder="Address"></textarea>
+            </div>
+            <div>
+                <label for="Description"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                <textarea id="Description" rows="4" formControlName="Description"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Description"></textarea>
+            </div>
+            <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload
+                    files</label>
+                <input formControlName="imageUrl"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    id="imageUrl" type="file" multiple>
             </div>
         </div>
         <button type="submit" [disabled]="!ContentForm.valid || loading"

@@ -1,41 +1,47 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EndPoints } from 'src/app/shared/constant';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { EndPoints } from 'src/app/shared/constant';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { AdminService } from '../services/admin.service';
+import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-create-update-role',
-  templateUrl: './create-update-role.component.html',
-  styleUrls: ['./create-update-role.component.css']
+  selector: 'app-create-update-accounts',
+  templateUrl: './create-update-accounts.component.html',
+  styleUrls: ['./create-update-accounts.component.css']
 })
-export class CreateUpdateRoleComponent implements OnInit {
+export class CreateUpdateAccountsComponent implements OnInit {
 
   action: any = 'Create';
   errMsg: any = '';
   loading: boolean = false;
   isEdit: boolean = false;
   ContentForm = new FormGroup({
-    roleName: new FormControl("", [Validators.required]),
-    roleDescription: new FormControl("", [Validators.required]),
+    userId: new FormControl("", [Validators.required]),
+    Totalgrams: new FormControl("", [Validators.required]),
+    subName: new FormControl("", [Validators.required]),
+    subscriptionType: new FormControl("", [Validators.required]),
   });
   Loading = false;
-  roles: any = [];
-  EndPoint = EndPoints.ROLE;
+  subscriptions: any = [];
+  users: any = [];
+  EndPoint = EndPoints.ACCOUNT;
+  userinfo: any;
   message: string = '';
-  @Input() role: any;
+  @Input() account: any;
   @Output() status: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private adminService: AdminService, private router: Router,
+    private userService: UserService, private router: Router,
     private ds: SharedDataService
   ) { }
 
   ngOnInit() {
-    if (Object.keys(this.role).length > 0) {
-      this.ContentForm.patchValue(this.role);
+    this.userinfo = this.ds.getUser();
+    this.getUsers();
+    if (Object.keys(this.account).length > 0) {
+      this.ContentForm.patchValue(this.account);
       this.isEdit = true;
     }
   }
@@ -72,7 +78,8 @@ export class CreateUpdateRoleComponent implements OnInit {
 
   Add() {
     this.loading = true;
-    this.adminService.create(this.EndPoint + '/createrole', this.ContentForm.value).subscribe(
+    this.ContentForm.value['userId'] = this.userinfo.user.Id;
+    this.userService.create(this.EndPoint + '/createaccount', this.ContentForm.value).subscribe(
       (res: any) => {
         if (res.status == true) {
           this.loading = false;
@@ -96,8 +103,9 @@ export class CreateUpdateRoleComponent implements OnInit {
 
   Edit() {
     this.loading = true;
-    this.ContentForm.value['item_id'] = this.role.Id;
-    this.adminService.update(this.EndPoint + '/updaterole', this.ContentForm.value).subscribe(
+    this.ContentForm.value['item_id'] = this.account.Id;
+    this.ContentForm.value['userId'] = this.userinfo.user.Id;
+    this.userService.update(this.EndPoint + '/updateaccount', this.ContentForm.value).subscribe(
       res => {
         if (res.status === true) {
           this.loading = false;
@@ -117,6 +125,36 @@ export class CreateUpdateRoleComponent implements OnInit {
       }
     );
 
+  }
+
+  getUsers() {
+    this.loading = true;
+    this.userService.getAll(this.EndPoint + '/getalladmins').subscribe(
+      (res: any) => {
+        if (res) {
+          this.users = res.data;
+        }
+        this.loading = false;
+      },
+      (err: any) => {
+        this.loading = false;
+      }
+    );
+  }
+
+  getSubscriptions() {
+    this.loading = true;
+    this.userService.getAll(this.EndPoint + '/getallsubscriptions').subscribe(
+      (res: any) => {
+        if (res) {
+          this.subscriptions = res.data;
+        }
+        this.loading = false;
+      },
+      (err: any) => {
+        this.loading = false;
+      }
+    );
   }
 
 }

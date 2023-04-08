@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EndPoints } from 'src/app/shared/constant';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
-import { AdminService } from '../services/admin.service';
 import Swal from 'sweetalert2';
+import { CreateUpdateMealOrderComponent } from '../create-update-meal-order/create-update-meal-order.component';
+import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-fulfilled-orders',
-  templateUrl: './fulfilled-orders.component.html',
-  styleUrls: ['./fulfilled-orders.component.css']
+  selector: 'app-pending-orders',
+  templateUrl: './pending-orders.component.html',
+  styleUrls: ['./pending-orders.component.css']
 })
-export class FulfilledOrdersComponent implements OnInit {
+export class PendingOrdersComponent implements OnInit {
 
   orders: any = [
     {
@@ -31,7 +32,7 @@ export class FulfilledOrdersComponent implements OnInit {
   Error: boolean = false;
   ErrorMessage: string = '';
 
-  constructor(private ds: SharedDataService, private dialog: MatDialog, private adminService: AdminService) { }
+  constructor(private ds: SharedDataService, private dialog: MatDialog, private userService: UserService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -39,7 +40,7 @@ export class FulfilledOrdersComponent implements OnInit {
 
   getData() {
     this.loading = true;
-    this.adminService.getAll(this.endpoint + '/getallfulfilledorders').subscribe(
+    this.userService.getAll(this.endpoint + '/getallpendingorders').subscribe(
       res => {
         if (res) {
           this.orders = res.data;
@@ -63,32 +64,32 @@ export class FulfilledOrdersComponent implements OnInit {
 
   }
 
-  // Update(element: any) {
-  //   const dialogRef = this.dialog.open(CreateUpdateMealComponent, {
-  //     width: '50%'
-  //   });
-  //   dialogRef.componentInstance.meal = element;
-  //   dialogRef.componentInstance.action = 'Edit';
-  //   dialogRef.componentInstance.status.subscribe(res => {
-  //     if (res) {
-  //       dialogRef.close();
-  //       this.getData();
-  //     }
-  //   });
-  // }
+  Update(element: any) {
+    const dialogRef = this.dialog.open(CreateUpdateMealOrderComponent, {
+      width: '50%'
+    });
+    dialogRef.componentInstance.order = element;
+    dialogRef.componentInstance.action = 'Edit';
+    dialogRef.componentInstance.status.subscribe(res => {
+      if (res) {
+        dialogRef.close();
+        this.getData();
+      }
+    });
+  }
 
-  // Add() {
-  //   const dialogRef = this.dialog.open(CreateUpdateMealComponent, {
-  //     width: '50%'
-  //   });
-  //   dialogRef.componentInstance.action = 'Create';
-  //   dialogRef.componentInstance.status.subscribe(res => {
-  //     if (res) {
-  //       dialogRef.close();
-  //       this.getData();
-  //     }
-  //   });
-  // }
+  Add() {
+    const dialogRef = this.dialog.open(CreateUpdateMealOrderComponent, {
+      width: '50%'
+    });
+    dialogRef.componentInstance.action = 'Create';
+    dialogRef.componentInstance.status.subscribe(res => {
+      if (res) {
+        dialogRef.close();
+        this.getData();
+      }
+    });
+  }
 
   Delete(element: any) {
     //    element.item_id = element.itemId;
@@ -102,7 +103,7 @@ export class FulfilledOrdersComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value == true) {
-        this.adminService.delete(element, this.endpoint + '/deleteorder').subscribe((res: any) => {
+        this.userService.delete(element, this.endpoint + '/cancelorder').subscribe((res: any) => {
           if (res) {
             Swal.fire(
               'Deleted!',

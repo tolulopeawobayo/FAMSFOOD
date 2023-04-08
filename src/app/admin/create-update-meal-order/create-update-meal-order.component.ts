@@ -1,31 +1,51 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { EndPoints } from 'src/app/shared/constant';
-import { SharedDataService } from 'src/app/shared/shared-data.service';
 import Swal from 'sweetalert2';
 import { AdminService } from '../services/admin.service';
+import { Router } from '@angular/router';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-create-update-role',
-  templateUrl: './create-update-role.component.html',
-  styleUrls: ['./create-update-role.component.css']
+  selector: 'app-create-update-meal-order',
+  templateUrl: './create-update-meal-order.component.html',
+  styleUrls: ['./create-update-meal-order.component.css']
 })
-export class CreateUpdateRoleComponent implements OnInit {
+export class CreateUpdateMealOrderComponent implements OnInit {
 
   action: any = 'Create';
   errMsg: any = '';
   loading: boolean = false;
   isEdit: boolean = false;
+  orders: any = [
+    {
+      "Id": 1, "mealId": 1, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "UserId": 1, "Address": "2, Kofoworola strt, Akute",
+      "quantityOrdered": 23, "isAvailable": true, "imageUrl": "https:deco.co"
+    },
+    {
+      "Id": 2, "mealId": 2, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "UserId": 1, "Address": "2, Kofoworola strt, Akute",
+      "quantityOrdered": 23, "isAvailable": true, "imageUrl": "https:deco.co"
+    },
+    {
+      "Id": 3, "mealId": 3, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "UserId": 1, "Address": "2, Kofoworola strt, Akute",
+      "quantityOrdered": 23, "isAvailable": true, "imageUrl": "https:deco.co"
+    }
+  ];
   ContentForm = new FormGroup({
-    roleName: new FormControl("", [Validators.required]),
-    roleDescription: new FormControl("", [Validators.required]),
+    mealName: new FormControl("", [Validators.required]),
+    Address: new FormControl("", [Validators.required]),
+    mealPrice: new FormControl("", [Validators.required]),
+    isAvailable: new FormControl("", [Validators.required]),
+    quantityOrdered: new FormControl("", [Validators.required]),
+    Description: new FormControl("", [Validators.required]),
+    imageUrl: new FormControl("", [Validators.required]),
   });
   Loading = false;
   roles: any = [];
-  EndPoint = EndPoints.ROLE;
+  userinfo: any
+  EndPoint = EndPoints.ORDER;
   message: string = '';
-  @Input() role: any;
+  @Input() order: any;
   @Output() status: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
@@ -34,8 +54,9 @@ export class CreateUpdateRoleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (Object.keys(this.role).length > 0) {
-      this.ContentForm.patchValue(this.role);
+    this.userinfo = this.ds.getUser();
+    if (Object.keys(this.order).length > 0) {
+      this.ContentForm.patchValue(this.order);
       this.isEdit = true;
     }
   }
@@ -72,7 +93,8 @@ export class CreateUpdateRoleComponent implements OnInit {
 
   Add() {
     this.loading = true;
-    this.adminService.create(this.EndPoint + '/createrole', this.ContentForm.value).subscribe(
+    this.ContentForm.value['userId'] = this.userinfo.user.id;
+    this.adminService.create(this.EndPoint + '/submitorder', this.ContentForm.value).subscribe(
       (res: any) => {
         if (res.status == true) {
           this.loading = false;
@@ -96,8 +118,9 @@ export class CreateUpdateRoleComponent implements OnInit {
 
   Edit() {
     this.loading = true;
-    this.ContentForm.value['item_id'] = this.role.Id;
-    this.adminService.update(this.EndPoint + '/updaterole', this.ContentForm.value).subscribe(
+    this.ContentForm.value['userId'] = this.userinfo.user.id;
+    this.ContentForm.value['Id'] = this.order.Id;
+    this.adminService.update(this.EndPoint + '/updateorder', this.ContentForm.value).subscribe(
       res => {
         if (res.status === true) {
           this.loading = false;

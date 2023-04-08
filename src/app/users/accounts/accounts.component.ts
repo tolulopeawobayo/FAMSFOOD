@@ -1,38 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EndPoints } from 'src/app/shared/constant';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 import Swal from 'sweetalert2';
-import { AdminService } from '../services/admin.service';
-import { CreateUpdateMealOrderComponent } from '../create-update-meal-order/create-update-meal-order.component';
+import { EndPoints } from 'src/app/shared/constant';
+import { CreateUpdateAccountsComponent } from '../create-update-accounts/create-update-accounts.component';
+import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-pending-orders',
-  templateUrl: './pending-orders.component.html',
-  styleUrls: ['./pending-orders.component.css']
+  selector: 'app-accounts',
+  templateUrl: './accounts.component.html',
+  styleUrls: ['./accounts.component.css']
 })
-export class PendingOrdersComponent implements OnInit {
+export class AccountsComponent implements OnInit {
 
-  orders: any = [
+  accounts: any = [
     {
-      "Id": 1, "mealId": 1, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "Address": "2, Kofo Street",
-      "quantityOrdered": 23, "isAvailable": true, "imageUrl": "https:deco.co"
+      "id": 1, "firstName": "test", "lastName": "Tricia", "userId": 3094, "Totalgrams": 300, "subscriptionType": "Gold", "subName": "Rice"
     },
     {
-      "Id": 2, "mealId": 2, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "Address": "2, Kofo Street",
-      "quantityOrdered": 23, "isAvailable": false, "imageUrl": "https:deco.co"
+      "id": 2, "firstName": "test", "lastName": "Tricia", "userId": 3094, "Totalgrams": 300, "subscriptionType": "Gold", "subName": "Rice"
     },
     {
-      "Id": 3, "mealId": 3, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "Address": "2, Kofo Street",
-      "quantityOrdered": 23, "isAvailable": true, "imageUrl": "https:deco.co"
+      "id": 3, "firstName": "test", "lastName": "Tricia", "userId": 3094, "Totalgrams": 300, "subscriptionType": "Gold", "subName": "Rice"
     }
   ];
   loading: boolean = false;
-  endpoint = EndPoints.ORDER;
+  endpoint = EndPoints.ACCOUNT;
   Error: boolean = false;
   ErrorMessage: string = '';
 
-  constructor(private ds: SharedDataService, private dialog: MatDialog, private adminService: AdminService) { }
+  constructor(private ds: SharedDataService, private dialog: MatDialog, private userService: UserService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -40,10 +37,10 @@ export class PendingOrdersComponent implements OnInit {
 
   getData() {
     this.loading = true;
-    this.adminService.getAll(this.endpoint + '/getallpendingorders').subscribe(
+    this.userService.getAll(this.endpoint + '/getallaccounts').subscribe(
       res => {
         if (res) {
-          this.orders = res.data;
+          this.accounts = res.data;
           //  this.dataSource.paginator = this.paginator;
           //this.dataSource.sort = this.sort;
           this.loading = false;
@@ -60,15 +57,11 @@ export class PendingOrdersComponent implements OnInit {
     );
   }
 
-  View(e: any) {
-
-  }
-
   Update(element: any) {
-    const dialogRef = this.dialog.open(CreateUpdateMealOrderComponent, {
+    const dialogRef = this.dialog.open(CreateUpdateAccountsComponent, {
       width: '50%'
     });
-    dialogRef.componentInstance.order = element;
+    dialogRef.componentInstance.account = element;
     dialogRef.componentInstance.action = 'Edit';
     dialogRef.componentInstance.status.subscribe(res => {
       if (res) {
@@ -79,7 +72,7 @@ export class PendingOrdersComponent implements OnInit {
   }
 
   Add() {
-    const dialogRef = this.dialog.open(CreateUpdateMealOrderComponent, {
+    const dialogRef = this.dialog.open(CreateUpdateAccountsComponent, {
       width: '50%'
     });
     dialogRef.componentInstance.action = 'Create';
@@ -103,7 +96,7 @@ export class PendingOrdersComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value == true) {
-        this.adminService.delete(element, this.endpoint + '/cancelorder').subscribe((res: any) => {
+        this.userService.delete(element, this.endpoint + '/deleteaccount').subscribe((res: any) => {
           if (res) {
             Swal.fire(
               'Deleted!',

@@ -1,47 +1,62 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AdminService } from '../services/admin.service';
+import { EndPoints } from 'src/app/shared/constant';
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
-import { EndPoints } from 'src/app/shared/constant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-create-update-accounts',
-  templateUrl: './create-update-accounts.component.html',
-  styleUrls: ['./create-update-accounts.component.css']
+  selector: 'app-create-update-meal-order',
+  templateUrl: './create-update-meal-order.component.html',
+  styleUrls: ['./create-update-meal-order.component.css']
 })
-export class CreateUpdateAccountsComponent implements OnInit {
+export class CreateUpdateMealOrderComponent implements OnInit {
 
   action: any = 'Create';
   errMsg: any = '';
   loading: boolean = false;
   isEdit: boolean = false;
+  orders: any = [
+    {
+      "Id": 1, "mealId": 1, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "UserId": 1, "Address": "2, Kofoworola strt, Akute",
+      "quantityOrdered": 23, "isAvailable": true, "imageUrl": "https:deco.co"
+    },
+    {
+      "Id": 2, "mealId": 2, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "UserId": 1, "Address": "2, Kofoworola strt, Akute",
+      "quantityOrdered": 23, "isAvailable": true, "imageUrl": "https:deco.co"
+    },
+    {
+      "Id": 3, "mealId": 3, "mealName": "test", "mealPrice": 2000, "Description": "testttt", "UserId": 1, "Address": "2, Kofoworola strt, Akute",
+      "quantityOrdered": 23, "isAvailable": true, "imageUrl": "https:deco.co"
+    }
+  ];
   ContentForm = new FormGroup({
-    // userId: new FormControl("", [Validators.required]),
-    Totalgrams: new FormControl("", [Validators.required]),
-    subName: new FormControl("", [Validators.required]),
-    subscriptionType: new FormControl("", [Validators.required]),
+    mealName: new FormControl("", [Validators.required]),
+    Address: new FormControl("", [Validators.required]),
+    mealPrice: new FormControl("", [Validators.required]),
+    isAvailable: new FormControl("", [Validators.required]),
+    quantityOrdered: new FormControl("", [Validators.required]),
+    Description: new FormControl("", [Validators.required]),
+    imageUrl: new FormControl("", [Validators.required]),
   });
   Loading = false;
-  subscriptions: any = [];
-  users: any = [];
-  EndPoint = EndPoints.ACCOUNT;
+  roles: any = [];
+  userinfo: any
+  EndPoint = EndPoints.ORDER;
   message: string = '';
-  userinfo: any;
-  @Input() account: any;
+  @Input() order: any;
   @Output() status: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private adminService: AdminService, private router: Router,
+    private userService: UserService, private router: Router,
     private ds: SharedDataService
   ) { }
 
   ngOnInit() {
     this.userinfo = this.ds.getUser();
-    this.getUsers();
-    if (Object.keys(this.account).length > 0) {
-      this.ContentForm.patchValue(this.account);
+    if (Object.keys(this.order).length > 0) {
+      this.ContentForm.patchValue(this.order);
       this.isEdit = true;
     }
   }
@@ -78,8 +93,8 @@ export class CreateUpdateAccountsComponent implements OnInit {
 
   Add() {
     this.loading = true;
-    this.ContentForm.value['userId'] = this.userinfo.user.Id;
-    this.adminService.create(this.EndPoint + '/createaccount', this.ContentForm.value).subscribe(
+    this.ContentForm.value['userId'] = this.userinfo.user.id;
+    this.userService.create(this.EndPoint + '/submitorder', this.ContentForm.value).subscribe(
       (res: any) => {
         if (res.status == true) {
           this.loading = false;
@@ -103,9 +118,9 @@ export class CreateUpdateAccountsComponent implements OnInit {
 
   Edit() {
     this.loading = true;
-    this.ContentForm.value['item_id'] = this.account.Id;
-    this.ContentForm.value['userId'] = this.userinfo.user.Id;
-    this.adminService.update(this.EndPoint + '/updateaccount', this.ContentForm.value).subscribe(
+    this.ContentForm.value['userId'] = this.userinfo.user.id;
+    this.ContentForm.value['Id'] = this.order.Id;
+    this.userService.update(this.EndPoint + '/updateorder', this.ContentForm.value).subscribe(
       res => {
         if (res.status === true) {
           this.loading = false;
@@ -125,36 +140,6 @@ export class CreateUpdateAccountsComponent implements OnInit {
       }
     );
 
-  }
-
-  getUsers() {
-    this.loading = true;
-    this.adminService.getAll(this.EndPoint + '/getalladmins').subscribe(
-      (res: any) => {
-        if (res) {
-          this.users = res.data;
-        }
-        this.loading = false;
-      },
-      (err: any) => {
-        this.loading = false;
-      }
-    );
-  }
-
-  getSubscriptions() {
-    this.loading = true;
-    this.adminService.getAll(this.EndPoint + '/getallsubscriptions').subscribe(
-      (res: any) => {
-        if (res) {
-          this.subscriptions = res.data;
-        }
-        this.loading = false;
-      },
-      (err: any) => {
-        this.loading = false;
-      }
-    );
   }
 
 }
