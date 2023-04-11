@@ -7,6 +7,7 @@ import { FulfilledOrdersComponent } from './fulfilled-orders/fulfilled-orders.co
 import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import { MySubscriptionComponent } from './my-subscription/my-subscription.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [{
     path: '', component: UsersComponent, children: [
@@ -16,6 +17,7 @@ const routes: Routes = [{
         { path: 'pending-order', component: PendingOrdersComponent },
         { path: 'account', component: AccountsComponent },
         { path: 'my-subscription', component: MySubscriptionComponent },
+        { path: 'my-profile', component: ProfileComponent },
     ]
 }
 ];

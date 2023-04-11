@@ -1,4 +1,4 @@
-<nav id="full-screen-example"
+<!-- <nav id="full-screen-example"
     class="fixed top-0 left-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
     data-te-sidenav-init data-te-sidenav-content="#content">
     <div class="mt-6">
@@ -9,25 +9,13 @@
             <h4 class="mb-2 text-2xl font-medium leading-[1.2]">Ann Smith</h4>
             <p class="mb-4">ann_s@mdbootstrap.com</p>
         </div>
-        <!-- <hr class="border-gray-300" /> -->
+        <hr class="border-gray-300" />
     </div>
     <div>
         <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
             <li class="relative" *ngFor="let menu of menus">
                 <a class="group flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-mexican-red hover:text-white hover:outline-none focus:bg-mexican-red focus:text-white focus:outline-none active:bg-mexican-red active:text-white active:outline-none data-[te-sidenav-state-active]:text-white data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                     routerLink="{{menu.url}}" data-te-sidenav-link-ref>
-                    <!-- <span
-                    class="mr-4 [&>svg]:h-3.5 [&>svg]:w-3.5 [&>svg]:fill-gray-700 [&>svg]:transition
-                    [&>svg]:duration-300 [&>svg]:ease-linear group-hover:[&>svg]:fill-blue-600
-                    group-focus:[&>svg]:fill-blue-600 group-active:[&>svg]:fill-blue-600
-                    group-[te-sidenav-state-active]:[&>svg]:fill-blue-600 motion-reduce:[&>svg]:transition-none
-                    dark:[&>svg]:fill-gray-300 dark:group-hover:[&>svg]:fill-gray-300 "> -->
-                    <!-- <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
-                            <path
-                                d='M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z' />
-                        </svg> -->
-                    <!-- {{menu.icon}}
-                    </span> -->
                     <span>{{menu.menuName}}</span>
                 </a>
                 <ul *ngIf="menu.hasChild"
@@ -41,14 +29,12 @@
                 </ul>
             </li>
         </ul>
-        <!-- <hr class="border-gray-300" /> -->
+        <hr class="border-gray-300" />
 
     </div>
-</nav>
-<!-- Sidenav -->
+</nav> -->
 
-<!-- Content -->
-<div class="h-screen w-screen bg-zinc-50 text-center">
+<!-- <div class="h-screen w-screen bg-zinc-50 text-center">
     <div class="absolute top-0 left-0 right-0 bottom-0 h-full w-full overflow-hidden bg-fixed py-12 text-center">
         <button id="toggler"
             class=" float-left m-12 inline-block rounded bg-mexican-red-600 px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-mexican-red hover:shadow-lg focus:bg-mexican-red focus:shadow-lg focus:outline-none focus:ring-0 active:bg-mexican-red-800 active:shadow-lg"
@@ -64,6 +50,61 @@
 
         <div id="content">
             <div class="container-fluid bg-whitish">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+<!-- component -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" /> -->
+
+
+
+<div class="relative min-h-screen flex flex-row bg-gray-100">
+    <div id="full-screen-example"
+        class="shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] -translate-x-full flex flex-col w-56 bg-white overflow-hidden data-[te-sidenav-hidden='false']:translate-x-0"
+        data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-mode="side"
+        data-te-sidenav-content="#contents">
+        <div class="flex items-center justify-center h-20 shadow-md">
+            <h1 class="text-3xl uppercase text-indigo-500">Logo</h1>
+        </div>
+        <ul class="flex flex-col py-4">
+            <li *ngFor="let menu of menus">
+                <a routerLink="{{menu.url}}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 
+                    hover:bg-mexican-red hover:text-white hover:outline-none focus:bg-mexican-red focus:text-white focus:outline-none active:bg-mexican-red active:text-white active:outline-none data-[te-sidenav-state-active]:text-white data-[te-sidenav-state-focus]:outline-none 
+                    ">
+                    <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
+                            class="bx bx-home"></i></span>
+                    <span class="text-sm font-medium">{{menu.menuName}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="contents" class="!pl-[0px] text-center flex-1 w-full overflow-hidden pl-0">
+        <header class="flex items-center bg-white justify-end h-20 shadow-md">
+            <span>
+                <button id="toggler"
+                    class=" float-left m-12 inline-block rounded bg-mexican-red-600 px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-mexican-red hover:shadow-lg focus:bg-mexican-red focus:shadow-lg focus:outline-none focus:ring-0 active:bg-mexican-red-800 active:shadow-lg"
+                    data-te-sidenav-toggle-ref data-te-target="#full-screen-example"
+                    aria-controls="#full-screen-example" aria-haspopup="true">
+                    <span class="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-3 w-3">
+                            <path fill-rule="evenodd"
+                                d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </button>
+            </span>
+            <span style="flex: 1 1 auto"></span>
+            <p class="text-2xl text-indigo-500 mr-5">Welcome</p>
+        </header>
+
+        <div id="content">
+            <div class="container-fluid">
                 <router-outlet></router-outlet>
             </div>
         </div>

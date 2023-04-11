@@ -1,0 +1,21 @@
+<div class="row">
+    <ng-container *ngIf="statusState == true; then success; else failed "></ng-container>
+
+    <ng-template #success class="text-center">
+        <div class="text-center col-md-12">
+            <i class="text-success display-1 fa fa-check-circle"></i>
+            <p class="display-5">{{statusMessage}}</p>
+
+            <button mat-raised-button class="m-1" color="warn" (click)="closeStatus(false)">Close</button>
+            <button mat-raised-button class="m-1" color="accent" (click)="closeStatus('view_receipt')">View Receipt</button>
+        </div>
+    
+        .
+    </ng-template>
+    <ng-template #failed >
+        <div class="text-center col-md-12">
+            <i class="text-danger display-1 fa fa-times-circle"></i>
+            <p class="display-5">{{statusMessage}}</p>
+        </div>
+    </ng-template>
+</div>

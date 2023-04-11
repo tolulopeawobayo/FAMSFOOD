@@ -12,15 +12,18 @@ import { FormsModule } from '@angular/forms';
 import { AccountsComponent } from './accounts/accounts.component';
 import { CreateUpdateAccountsComponent } from './create-update-accounts/create-update-accounts.component';
 import { MySubscriptionComponent } from './my-subscription/my-subscription.component';
+import { StatusMessageComponent } from './status-message/status-message.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
 @NgModule({
   declarations: [
     UsersComponent, PendingOrdersComponent, FulfilledOrdersComponent, CreateUpdateMealOrderComponent,
-    NavBarComponent, AccountsComponent, CreateUpdateAccountsComponent,
+    NavBarComponent, AccountsComponent, CreateUpdateAccountsComponent, StatusMessageComponent,
     DashboardComponent,
-    MySubscriptionComponent
+    MySubscriptionComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule, UsersRoutingModule, MaterialModule, FormsModule
