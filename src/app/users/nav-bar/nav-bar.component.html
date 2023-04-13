@@ -87,7 +87,7 @@
         <header class="flex items-center bg-white justify-end h-20 shadow-md">
             <span>
                 <button id="toggler"
-                    class=" float-left m-12 inline-block rounded bg-mexican-red-600 px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-mexican-red hover:shadow-lg focus:bg-mexican-red focus:shadow-lg focus:outline-none focus:ring-0 active:bg-mexican-red-800 active:shadow-lg"
+                    class=" float-left m-12 inline-block rounded bg-mexican-red px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-mexican-red-600 hover:shadow-lg focus:bg-mexican-red focus:shadow-lg focus:outline-none focus:ring-0 active:bg-mexican-red-800 active:shadow-lg"
                     data-te-sidenav-toggle-ref data-te-target="#full-screen-example"
                     aria-controls="#full-screen-example" aria-haspopup="true">
                     <span class="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
@@ -104,10 +104,17 @@
         </header>
 
         <div id="content">
-            <div class="container-fluid">
+            <div class="container-fluid ml-3">
                 <router-outlet></router-outlet>
             </div>
         </div>
+
+        <footer class="bg-black text-center text-white">
+            <div class="p-4 text-center" style="background-color: rgba(0, 0, 0, 0.2)">
+                © 2023 Copyright:
+                <a class="text-whitehite" href="https://tailwind-elements.com/">Famsfood</a>
+            </div>
+        </footer>
 
     </div>
 </div>

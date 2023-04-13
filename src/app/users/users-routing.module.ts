@@ -12,7 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [{
     path: '', component: UsersComponent, children: [
         { path: '', redirectTo: 'home', pathMatch: 'prefix' },
-        { path: 'home', component: NavBarComponent },
+        { path: 'home', component: DashboardComponent },
         { path: 'fulfilled-order', component: FulfilledOrdersComponent },
         { path: 'pending-order', component: PendingOrdersComponent },
         { path: 'account', component: AccountsComponent },

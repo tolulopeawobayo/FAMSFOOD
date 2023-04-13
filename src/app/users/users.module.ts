@@ -14,6 +14,7 @@ import { CreateUpdateAccountsComponent } from './create-update-accounts/create-u
 import { MySubscriptionComponent } from './my-subscription/my-subscription.component';
 import { StatusMessageComponent } from './status-message/status-message.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MealItemsComponent } from './meal-items/meal-items.component';
 
 
 
@@ -23,7 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
     NavBarComponent, AccountsComponent, CreateUpdateAccountsComponent, StatusMessageComponent,
     DashboardComponent,
     MySubscriptionComponent,
-    ProfileComponent
+    ProfileComponent,
+    MealItemsComponent
   ],
   imports: [
     CommonModule, UsersRoutingModule, MaterialModule, FormsModule
