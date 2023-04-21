@@ -31,11 +31,11 @@ export class DashboardComponent implements OnInit {
     this.adminService.getAll(this.endpoint + '/getdashboard?id=' + this.userinfo.user.id).subscribe(
       res => {
         if (res) {
+          this.loading = false;
           this.dashboard = res.data;
           this.meals = res.data.listOfMeals;
           //  this.dataSource.paginator = this.paginator;
           //this.dataSource.sort = this.sort;
-          this.loading = false;
         } else {
           this.ErrorMessage = res.message;
           this.loading = false;

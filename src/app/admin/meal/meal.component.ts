@@ -40,7 +40,7 @@ export class MealComponent implements OnInit {
 
   getData() {
     this.loading = true;
-    this.adminService.getAll(this.endpoint + '/getallmeal').subscribe(
+    this.adminService.getAll(this.endpoint + '/getallmeals').subscribe(
       res => {
         if (res) {
           this.meals = res.data;

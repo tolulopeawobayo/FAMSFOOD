@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
     }
   ];
   loading: boolean = false;
-  endpoint = EndPoints.USER;
+  endpoint = EndPoints.ONBOARDING;
   Error: boolean = false;
   ErrorMessage: string = '';
 
@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit {
 
   getData() {
     this.loading = true;
-    this.adminService.getAll(this.endpoint + '/getusers').subscribe(
+    this.adminService.getAll(this.endpoint + '/getallusers').subscribe(
       res => {
         if (res) {
           this.users = res.data;
