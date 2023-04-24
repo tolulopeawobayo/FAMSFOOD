@@ -15,6 +15,8 @@ import { MySubscriptionComponent } from './my-subscription/my-subscription.compo
 import { StatusMessageComponent } from './status-message/status-message.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MealItemsComponent } from './meal-items/meal-items.component';
+import { OrdersComponent } from './orders/orders.component';
+import { MealDetailsComponent } from './meal-details/meal-details.component';
 
 
 
@@ -22,10 +24,11 @@ import { MealItemsComponent } from './meal-items/meal-items.component';
   declarations: [
     UsersComponent, PendingOrdersComponent, FulfilledOrdersComponent, CreateUpdateMealOrderComponent,
     NavBarComponent, AccountsComponent, CreateUpdateAccountsComponent, StatusMessageComponent,
-    DashboardComponent,
+    DashboardComponent, OrdersComponent,
     MySubscriptionComponent,
     ProfileComponent,
-    MealItemsComponent
+    MealItemsComponent,
+    MealDetailsComponent
   ],
   imports: [
     CommonModule, UsersRoutingModule, MaterialModule, FormsModule

@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MealItemsComponent implements OnInit {
 
+  images: any = [
+    "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg", "https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg",
+    "https://tecdn.b-cdn.net/img/Photos/Slides/img%20(22).jpg", "https://tecdn.b-cdn.net/img/Photos/Slides/img%20(15).jpg"
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
