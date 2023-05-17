@@ -112,6 +112,9 @@
                                 Weight
                             </th>
                             <th scope="col" class="th-class">
+                                Units
+                            </th>
+                            <th scope="col" class="th-class">
                                 Currency
                             </th>
                             <th scope="col" class="th-class">
@@ -146,7 +149,7 @@
                                 {{food.itemName}}
                             </td>
                             <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                {{food.Description}}
+                                {{food.description}}
                             </td>
                             <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{food.itemCategory}}
@@ -155,16 +158,19 @@
                                 {{food.itemPrice}}
                             </td>
                             <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                {{food.Weight}}
-                            </td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{food.Currency}}
-                            </td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{food.quantityAvailable}}
+                                {{food.weight}}
                             </td>
                             <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                {{food.isAvailable}}
+                                {{food.units}}
+                            </td>
+                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{food.currency}}
+                            </td>
+                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{food.quantityAvailableInKG}}
+                            </td>
+                            <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                {{food.available}}
                             </td>
                             <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{food.imageUrl}}

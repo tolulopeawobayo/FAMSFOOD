@@ -2,8 +2,6 @@
 
     <div class=" mb-2 ml-8">
         <div class="grid grid-cols-1 gap-4 w-full mt-5 ">
-
-
             <div
                 class="block mr-5 rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-gray-700">
                 <div class="p-8">
@@ -39,11 +37,12 @@
                         <div class="p-8">
                             <ul class="mb-5 flex list-none flex-col flex-wrap border-b-0 pl-0 md:flex-row"
                                 role="tablist" data-te-nav-ref>
-                                <li role="presentation">
-                                    <a href="#tabs-home"
+                                <li role="presentation" *ngFor="let food of fooditems">
+                                    <a href="#tabs-{{food.itemId}}" id="{{food.itemId}}" (click)="setData($event)"
                                         class="font-sans font-bold my-2 block border-x-0 border-t-0 border-b-2 border-transparent px-7 pt-4 pb-3.5 text-xs uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-mexican-red data-[te-nav-active]:text-mexican-red dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-mexican-red-400"
-                                        data-te-toggle="pill" data-te-target="#tabs-home" data-te-nav-active role="tab"
-                                        aria-controls="tabs-home" aria-selected="true">Rice</a>
+                                        data-te-toggle="pill" data-te-target="#tabs-${food.itemId}" data-te-nav-active
+                                        role="tab" aria-controls="tabs-${food.itemId}"
+                                        aria-selected="true">{{food.itemCategory}}</a>
                                 </li>
                                 <!-- <li role="presentation">
                             <a href="#tabs-profile"
@@ -154,12 +153,15 @@
                                 <div class="justify-between">
                                     <p class="py-4 float-left font-sans">₦3,000.00
                                     </p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="w-6 h-6 text-mexican-red">
-                                        <path fill-rule="evenodd"
-                                            d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <a (click)="Add()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            class="w-6 h-6 text-mexican-red">
+                                            <path fill-rule="evenodd"
+                                                d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </a>
+
 
                                 </div>
                             </div>

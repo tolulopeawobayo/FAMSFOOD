@@ -17,6 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { MealItemsComponent } from './meal-items/meal-items.component';
 import { OrdersComponent } from './orders/orders.component';
 import { MealDetailsComponent } from './meal-details/meal-details.component';
+import { OrderModalComponent } from './order-modal/order-modal.component';
 
 
 
@@ -28,7 +29,8 @@ import { MealDetailsComponent } from './meal-details/meal-details.component';
     MySubscriptionComponent,
     ProfileComponent,
     MealItemsComponent,
-    MealDetailsComponent
+    MealDetailsComponent,
+    OrderModalComponent
   ],
   imports: [
     CommonModule, UsersRoutingModule, MaterialModule, FormsModule

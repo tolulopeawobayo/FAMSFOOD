@@ -21,11 +21,11 @@ export class CreateUpdateFoodItemsComponent implements OnInit {
     itemName: new FormControl("", [Validators.required]),
     itemCategory: new FormControl("", [Validators.required]),
     itemPrice: new FormControl("", [Validators.required]),
-    Currency: new FormControl("", [Validators.required]),
-    Weight: new FormControl("", [Validators.required]),
-    isAvailable: new FormControl("", [Validators.required]),
-    quantityAvailable: new FormControl("", [Validators.required]),
-    Description: new FormControl("", [Validators.required]),
+    currency: new FormControl("", [Validators.required]),
+    weight: new FormControl("", [Validators.required]),
+    available: new FormControl("", [Validators.required]),
+    quantityAvailableInKG: new FormControl("", [Validators.required]),
+    description: new FormControl("", [Validators.required]),
     imageUrl: new FormControl("", [Validators.required]),
   });
   Loading = false;
